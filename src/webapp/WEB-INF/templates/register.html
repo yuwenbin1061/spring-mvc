@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form th:action="@{/requestParam/register4}" method="post">
+    用户名：<input type="text" name="username" value="zhangsan"/><br>
+    密码：<input type="text" name="password" /><br>
+    性别：
+    男:<input type="radio" name="sex" value="男">
+    女:<input type="radio" name="sex" value="女"><br>
+    简介：<textarea name="introduction" rows="4" cols="10"></textarea><br>
+    <input type="submit" value="注册" />
+</form>
+</body>
+</html>
