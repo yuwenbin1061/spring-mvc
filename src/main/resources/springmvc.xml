@@ -13,6 +13,11 @@
     <!-- 组件扫描-->
     <context:component-scan base-package="com.wenbin.controller"/>
 
+    <!-- 视图控制器标-->
+    <mvc:view-controller path="/" view-name="index" />
+    <!-- MVC的注解驱动-->
+    <mvc:annotation-driven />
+
     <!-- 视图解析 -->
     <bean id="templateResolver"
           class="org.thymeleaf.spring6.templateresolver.SpringResourceTemplateResolver">
@@ -31,5 +36,12 @@
         <property name="order" value="1" />
         <property name="characterEncoding" value="UTF-8" />
     </bean>
+
+<!--    配置静态资源-->
+    <!-- 使用Tomcat的defaultServlet -->
+<!--    <mvc:default-servlet-handler />-->
+
+<!--    使用SpringMvc resource配置-->
+    <mvc:resources mapping="/static/**" location="/static/" />
 
 </beans>

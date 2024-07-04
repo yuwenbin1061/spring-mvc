@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>测试Restful风格请求</title>
+</head>
+<body>
+<a th:href="@{/user}">测试Restful请求，查询所有用户情报</a>
+<a th:href="@{/user/220}">测试Restful请求，查询220用户情报</a>
+<form th:action="@{/user}" method="post">
+    用户名：<input type="text" name="username"><br>
+    密码：<input type="text" name="password"><br>
+    年龄：<input type="text" name="age"><br>
+    <input type="submit" value="登录">
+</form>
+</body>
+</html>

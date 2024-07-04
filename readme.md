@@ -200,7 +200,7 @@ public String testParams() {
         return"ok";
 }
 ```
-3. params不匹配报HTTP400错误：Invalid request parameters.
+params不匹配报HTTP400错误：Invalid request parameters.
 
 ### headers 属性
 也是String[]数组，用来设置请求头映射
@@ -215,15 +215,15 @@ public String testParams() {
 HttpSession可以取得session
 
 ## 使用@RequestParam注解获得请求参数
-1. value属性
+1.value属性
 
 value属性的值应该跟请求参数名一致，方法参数名不需要和请求参数值一致<br>
 
-2. require属性
+2.require属性
 
 require属性设定此参数是否是必须，默认值是true
 
-3. defaultValue属性
+3.defaultValue属性
 
 ## 使用参数自动映射
 当形参和请求参数一致时，可以省略@RequstParam注解<br>
@@ -328,3 +328,30 @@ public class CharacterEncodingFilter implements Filter {
         <url-pattern>/*</url-pattern>
     </filter-mapping>
 ```
+
+# 视图
+
+## 视图控制器
+```xml
+<mvc:view-controller path="/" view-name="index" />
+```
+
+当请求不需要经过后台处理,直接返回视图的情况，可以使用springmvc配置中的view-controller。<br>
+此种方法不需要写controller方法就能返回视图。
+
+> 使用view-controller配置时，mvc的注解驱动会失效，需要开启注解驱动
+```xml
+<!-- 开启Spring MVC的注解驱动-->
+<mvc:annotation-driven />
+```
+
+## 静态资源访问
+
+Spring MVC请求静态资源有两种方式<br>
+1.第一种使用tomcat的默认servlet，通过springmvc配置文件中添加`<mvc:default-servlet-handler />`配置<br>
+
+2.第二种方式使用spring的mvc:resources配置
+```xml
+<mvc:resources mapping="/static/**" location="/static/" />
+```
+mapping属性指定请求路径，location指定静态资源目录
