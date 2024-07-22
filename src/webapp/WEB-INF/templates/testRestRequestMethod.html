@@ -1,17 +1,38 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
     <title>测试Restful风格请求</title>
 </head>
+
 <body>
-<a th:href="@{/user}">测试Restful请求，查询所有用户情报</a>
-<a th:href="@{/user/220}">测试Restful请求，查询220用户情报</a>
-<form th:action="@{/user}" method="post">
-    用户名：<input type="text" name="username"><br>
-    密码：<input type="text" name="password"><br>
-    年龄：<input type="text" name="age"><br>
-    <input type="submit" value="登录">
-</form>
+    <a th:href="@{/user}">测试Restful请求，查询所有用户情报</a><br>
+    <a th:href="@{/user/220}">测试Restful请求，查询220用户情报</a><br>
+    <form id="userForm" th:action="@{/user}" method="post" onsubmit="userSubmit(event)">
+        用户名：<input type="text" name="username"><br>
+        密码：<input type="text" name="password"><br>
+        年龄：<input type="text" name="age"><br>
+        <input id="hiddenMethod" type="hidden" name="_method"><br>
+        <input type="submit" value="登录">
+        <input type="submit" value="修改">
+        <input type="submit" value="删除">
+    </form>
+
+    <script>
+        function userSubmit(event) {
+            let userForm = document.getElementById("userForm");
+            let methodInput = document.getElementById('hiddenMethod');
+            if (event.submitter.value == "修改") {
+                methodInput.value = "PUT";
+            }
+
+            if (event.submitter.value == "删除") {
+                userForm.action = userForm.action + "/123";
+                methodInput.value = "DELETE";
+            }
+        }
+    </script>
 </body>
+
 </html>

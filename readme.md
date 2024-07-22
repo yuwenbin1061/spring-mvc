@@ -355,3 +355,19 @@ Spring MVC请求静态资源有两种方式<br>
 <mvc:resources mapping="/static/**" location="/static/" />
 ```
 mapping属性指定请求路径，location指定静态资源目录
+
+## 发送PUT，DELETE请求
+默认的form标签只能发送GET和POST请求，想要发送PUT，DELETE请求需要使用Spring MVC的HiddenHttpMethodFilter过滤器<br>
+* 使用HiddenHttpMethodFilter过滤器有几点要求:<br>
+1. 页面需要是POST请求
+2. 表单中有一个name为"_method"隐藏表单，并将其值设为PUT或POST（大小写不限）
+3. web.xml中配置过滤器
+
+HiddenHttpMethodFilter过滤器会根据"_method"设定的值将请求转换成PUT或DELETE方法<br>
+> HiddenHttpMethodFilter过滤器徐配置在字符编码过滤器之后，否则字符编码过滤器会失效
+
+
+## ResponseBody
+
+
+
