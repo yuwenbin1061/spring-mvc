@@ -1,5 +1,7 @@
-# Spring MVC环境搭建
-**1.pom.xml添加依赖**
+# 第一章 Spring MVC环境搭建
+## 搭建基础Spring MVC工程
+### 1.基础Maven依赖添加
+搭建Spring MVC环境首先要在Maven建立的空项目中添加必要的依赖
 ```xml
   <dependencies>
     <!-- springmvc -->
@@ -34,32 +36,28 @@
     
   </dependencies>
 ```
-
-**2.建立webapp/WEB-INF文件夹和web.xml配置文件**
-
-2.1 tomcat配置
-
-      Context path:/springmvc，项目的根路径，
-      controlle中RequstMapping指定的path前面加上/springmvc才是url
-  
-
-2.2 web.xml配置文件
+### 2.建立web.xml配置文件
+1. 在工程目录下建立webapp/WEB-INF文件夹<br>
+2. 建立web.xml文件
+3. web.xml中配置DispatcherServlet
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app xmlns="https://jakarta.ee/xml/ns/jakartaee"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee
          https://jakarta.ee/xml/ns/jakartaee/web-app_6_0.xsd" version="6.0">
     <!-- DispatcherServlet-->
-    <!-- 1.contextConfigLocation指定springmvc配置文件的路径，默认配置文件<servlet-name>-servlet.xml -->
-    <!-- 2.load-on-startup:当值为0或者大于0时，表示容器在应用启动时就加载这个servlet。
-            当是一个负数时或者没有指定时，则指示容器在该servlet被选择时才加载。 -->
     <servlet>
         <servlet-name>springmvc</servlet-name>
         <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+        <!-- 1.contextConfigLocation指定springmvc配置文件的路径，默认配置文件<servlet-name>-servlet.xml -->
         <init-param>
             <param-name>contextConfigLocation</param-name>
             <param-value>classpath:springmvc.xml</param-value>
         </init-param>
+        <!-- load-on-startup:
+        当值为0或者大于0时，表示容器在应用启动时就加载这个servlet。
+        正数的值越小，启动是加载改servlet的优先级越高
+        当是一个负数时或者没有指定时，则指示容器在该servlet被选择时才加载。 -->
         <load-on-startup>1</load-on-startup>
     </servlet>
 
@@ -70,9 +68,10 @@
 </web-app>
 ```
 
-**3.建立springmvc配置文件**
+### 3.建立Spring MVC配置文件
+1. 在放在resources目录下建立springmvc.xml文件
+2. 编辑springmvc.xml文件配置组件扫描和视图解析,使用thymeleaf作为使用模板
 
-配置文件为web.xml中contextConfigLocation指定的路径（springmvc.xml），放在resources目录下
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
@@ -95,7 +94,7 @@
         <property name="prefix" value="/WEB-INF/templates/"/>
         <property name="suffix" value=".html"/>
         <property name="templateMode" value="HTML"/>
-        <property name="cacheable" value="true"/>
+        <property name="characterEncoding" value="UTF-8"/>
     </bean>
     <bean id="templateEngine"
           class="org.thymeleaf.spring6.SpringTemplateEngine">
@@ -108,10 +107,12 @@
         <property name="characterEncoding" value="UTF-8" />
     </bean>
 
+    <!-- 启用MVC注解 -->
+    <mvc:annotation-driven />
+
 </beans>
 ```
-
-**3.创建controller**
+### 3.新建Controller
 ```java
 package com.wenbin.controller;
 
@@ -126,9 +127,21 @@ public class HelloController {
     }
 }
 ```
-**4.创建视图模板**
-
-模板文件名hello.html，放在src/webapp/WEB-INF/templates/hello.html
+### 4.创建视图模板
+1. 创建templates文件，用于存放视图模板页面<br> src/webapp/WEB-INF/templates
+2. 创建hello.html
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <h1>Hello! Let`s learn Spring MVC.</h1>
+</body>
+</html>
+```
 
 
 # Spring MVC注解
