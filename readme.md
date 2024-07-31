@@ -144,33 +144,16 @@ public class HelloController {
 ```
 
 
-# Spring MVC注解
-## @RequestMapping
-```java
-@Controller
-@RequestMapping("/a")
-public class HelloController {
+# @RequestMapping
+## 作用范围
+@RequestMapping可以作用于类级别，也可以作用于方法级别
 
-    @RequestMapping("/b")
-    public String hello(){
-        return "hello";
-    }
 
-    @RequestMapping("/c")
-    public String test(){
-        return "hello";
-    }
-}
+## value属性
+1. value属性是一个String[]数组,可以指定多个请求路径
+2. value属性同path属性
 
-```
-### value属性
-1. RequestMapping可以作用在类上，也可以作用在方法上.<br>
-    类上的RequestMapping会增加前缀，hello方法的请求路径为"/a/b",test方法的请求路径为"/a/c"  <br>  <br>
-
-2. value属性是一个String[]数组,可以指定多个请求路径。<br>
-当只有一个请求路径时中括号可以省略。<br><br>
-
-3. 模糊匹配,PathPattern [Doc](https://docs.spring.io/spring-framework/reference/web/webmvc/mvc-controller/ann-requestmapping.html)<br>
+### value属性值的匹配
  ?：匹配一个字符(除/，?以外，并且不能为空)<br>
  *：匹配0个或任意字符(除/，?以外)<br>
  **： spring6版本，匹配0个或任意字符直到路径结束,左边只能是/<br>
@@ -188,7 +171,7 @@ public  String testValue3(@PathVariable("username") String username, @PathVariab
 
 
 
-### method 属性
+## method 属性
 衍生的RequestMapping<br>
     @GetMapping <br>
     @PostMapping <br>

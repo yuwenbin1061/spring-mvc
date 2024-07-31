@@ -9,14 +9,16 @@
   <version>1.0-SNAPSHOT</version>
 
   <name>spring-mvc</name>
-    <modules>
-        <module>base-project</module>
-    </modules>
 
-    <properties>
+  <modules>
+      <module>base-project</module>
+      <module>springmvc01</module>
+  </modules>
+
+  <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <maven.compiler.source>11</maven.compiler.source>
-    <maven.compiler.target>11</maven.compiler.target>
+    <maven.compiler.source>17</maven.compiler.source>
+    <maven.compiler.target>17</maven.compiler.target>
   </properties>
 
   <packaging>pom</packaging>
