@@ -153,21 +153,32 @@ public class HelloController {
 1. value属性是一个String[]数组,可以指定多个请求路径
 2. value属性同path属性
 
-### value属性值的匹配
- ?：匹配一个字符(除/，?以外，并且不能为空)<br>
- *：匹配0个或任意字符(除/，?以外)<br>
- **： spring6版本，匹配0个或任意字符直到路径结束,左边只能是/<br>
-   @RequestMapping(value = "/xyz/**")<br><br>
+### 一，路径匹配：AntPathMatcher
+#### 1.`?`匹配一个字符
+`/resources/ima?e.png`- 在一个路径段中匹配一个字符
+#### 2.`*`匹配零或多个字符
+`/resources/*.png`- 在一个路径段中匹配零或多个字符
+#### 3.`**`匹配复数个路径段
+`/resources/**` - 匹配复数个路径段
 
-4. value属性的占位符,路径参数<br>
-当value的值是下面这样，可以使用@PathVariable来取得中括号位置的值
+> 上述此方法无法匹配`/`和`?`字符
+
+> `**`只能放在末尾
+### 二，占位符和路径参数
+`@RequestMapping("/user/{username}/detail")`中括号可以匹配相应位置上的路径段<br>
+例如：`/user/xiaohu/detail`匹配中间的`xiaohu`
+#### 1.注解：@PathVariable
+取得占位符实际的值需要用到`@PathVariable`注解作用于方法形参上<br>
+@PathVariable的value值对应占位符的名字,并将其的值赋给控制器方法形参
 ```java
-@RequestMapping(value = "/testValue/{username}/{password}")
-public  String testValue3(@PathVariable("username") String username, @PathVariable("password") String password){
-        System.out.println("username = " + username + ", password = " + password);
+@RequestMapping("/user/{username}/detail")
+    public String test02(@PathVariable("username") String username){
+        System.out.println("username = " + username);
         return "ok";
-        }
+    }
 ```
+> 当形参名和占位符名一样，可以省略@PathVariable,Spring6实现这个功能需要配置[-parameters](#-parameters)
+
 
 
 
@@ -221,10 +232,11 @@ require属性设定此参数是否是必须，默认值是true
 
 3.defaultValue属性
 
-## 使用参数自动映射
-当形参和请求参数一致时，可以省略@RequstParam注解<br>
+# 使用参数自动映射<span id="-parameters"></span>
+当形参和请求参数一致时，可以省略@RequstParam,@PathVariable注解<br>
 此种方式Spring6版本不再默认支持，Spring6版本需要配置'-parameters'参数
 ```xml
+<!--在maven中配置-parameters参数-->
 <build>
     <plugins>
         <plugin>
