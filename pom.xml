@@ -13,6 +13,7 @@
   <modules>
       <module>base-project</module>
       <module>springmvc01</module>
+      <module>spring-validation</module>
   </modules>
 
   <properties>

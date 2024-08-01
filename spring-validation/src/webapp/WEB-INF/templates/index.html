@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>测试Spring表单验证</h1>
+<form th:action="@{/learnValidation/add}" method="post">
+    用户名：<input type="text" name="userName"><br>
+    密码：<input type="password" name="password"><br>
+    邮箱：<input type="email" name="email"><br>
+    <input type="submit" value="登录用户">
+</form>
+</body>
+</html>
