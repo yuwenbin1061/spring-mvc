@@ -1,13 +1,13 @@
 package com.wenbin.springvalidation.dto;
 
 import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 
 public class UserDto {
-    @NotEmpty(message = "用户名不能为空")
+    @NotBlank(message = "{message001}")
     private String userName;
-    @Pattern(regexp = "[0-9a-zA-Z]{6,30}", message = "密码必须是半角字符")
+    @Pattern(regexp = "[0-9a-zA-Z]{0,30}", message = "密码必须是半角字符")
     private String password;
     private String realName;
     @Email

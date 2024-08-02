@@ -4,12 +4,17 @@
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
+<style>
+    .va_error {
+        color: red;
+    }
+</style>
 <body>
 <h1>测试Spring表单验证</h1>
 <form th:action="@{/learnValidation/add}" method="post">
-    用户名：<input type="text" name="userName"><br>
-    密码：<input type="password" name="password"><br>
-    邮箱：<input type="email" name="email"><br>
+    用户名：<input type="text" name="userName"><span th:text="${ERR_userName}" class="va_error"></span><br>
+    密码：<input type="password" name="password"><span th:text="${ERR_password}" class="va_error"></span><br>
+    邮箱：<input type="email" name="email"><span th:text="${ERR_email}" class="va_error"></span><br>
     <input type="submit" value="登录用户">
 </form>
 </body>

@@ -441,5 +441,57 @@ mapping属性指定请求路径，location指定静态资源目录
 HiddenHttpMethodFilter过滤器会根据"_method"设定的值将请求转换成PUT或DELETE方法<br>
 > HiddenHttpMethodFilter过滤器徐配置在字符编码过滤器之后，否则字符编码过滤器会失效
 
-# 单项目check
+# Spring MVC表单验证
 
+## Bean Validation
+
+### 基本用法
+
+1.引入依赖
+
+```xml
+
+<dependency>
+    <groupId>org.hibernate.validator</groupId>
+    <artifactId>hibernate-validator</artifactId>
+    <version>8.0.1.Final</version>
+</dependency>
+```
+
+2.在要校验对bean属性上加校验注解
+3.Controller方法参数使用@Valid注解
+
+### 校验注解
+
+1.Bean Validation注解：
+
+| 注解                          | 说明                           |
+|-----------------------------|------------------------------|
+| @Valid                      | 被注释的元素是一个对象，需要检查此对象的所有字段值    |
+| @Null                       | 被注释的元素必须为 null               |
+| @NotNull                    | 被注释的元素必须不为 null              |
+| @AssertTrue                 | 被注释的元素必须为 true               |
+| @AssertFalse                | 被注释的元素必须为 false              |
+| @Min(value)                 | 被注释的元素必须是一个数字，其值必须大于等于指定的最小值 |
+| @Max(value)                 | 被注释的元素必须是一个数字，其值必须小于等于指定的最大值 |
+| @DecimalMin(value)          | 被注释的元素必须是一个数字，其值必须大于等于指定的最小值 |
+| @DecimalMax(value)          | 被注释的元素必须是一个数字，其值必须小于等于指定的最大值 |
+| @Size(max, min)             | 被注释的元素的大小必须在指定的范围内           |
+| @Digits (integer, fraction) | 被注释的元素必须是一个数字，其值必须在可接受的范围内   |
+| @Past                       | 被注释的元素必须是一个过去的日期             |
+| @Future                     | 被注释的元素必须是一个将来的日期             |
+| @Pattern(value)             | 被注释的元素必须符合指定的正则表达式           |
+
+2.Hibernate Validator的注解：
+
+| 注解                                           | 说明                                         |
+|----------------------------------------------|--------------------------------------------|
+| @Email                                       | 被注释的元素必须是电子邮箱地址                            |
+| @Length(min=, max=)                          | 被注释的字符串的大小必须在指定的范围内                        |
+| @NotEmpty                                    | 被注释的集合的不能非空                                |
+| @Range(min=, max=)                           | 被注释的元素必须在合适的范围内                            |
+| @NotBlank                                    | 被注释的字符串的必须非空                               |
+| @URL(protocol=,host=, port=,regexp=, flags=) | 被注释的字符串必须是一个有效的url                         |
+| @CreditCardNumber                            | 被注释的字符串必须通过Luhn校验算法银行卡，信用卡等号码一般都用Luhn计算合法性 |
+
+## 校验国际化
